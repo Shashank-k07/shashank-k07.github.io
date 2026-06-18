@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shashank K — Design Verification Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:        #F7F9FC;
+      --surface:   #FFFFFF;
+      --border:    #E2E8F0;
+      --accent:    #2563EB;
+      --accent2:   #7C3AED;
+      --text:      #1E293B;
+      --muted:     #64748B;
+      --chip-bg:   #EEF2FF;
+      --chip-text: #3730A3;
+      --tag-bg:    #F0FDF4;
+      --tag-text:  #166534;
+      --mono:      'Space Mono', monospace;
+      --sans:      'Inter', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(247,249,252,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 5vw; height: 58px;
+    }
+    .nav-brand {
+      font-family: var(--mono);
+      font-size: 13px; font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 13px;
+      font-weight: 500; color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; min-height: 92vh;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 5vw 80px 7vw;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 12px; letter-spacing: 0.12em;
+      color: var(--accent); text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .hero-name {
+      font-size: clamp(38px, 5vw, 62px);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+    .hero-name span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-role {
+      margin-top: 10px;
+      font-size: 18px; font-weight: 400; color: var(--muted);
+    }
+    .hero-desc {
+      margin-top: 24px;
+      font-size: 15px; color: var(--muted); max-width: 420px;
+      line-height: 1.75;
+    }
+    .hero-cta {
+      margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 11px 22px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: all .2s; cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+    }
+    .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,.3); }
+    .btn-outline {
+      background: var(--surface); color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .hero-right {
+      background: linear-gradient(155deg, #EEF2FF 0%, #F0F9FF 60%, #F5F3FF 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 60px 5vw;
+    }
+    .circuit-card {
+      background: var(--surface); border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 32px; width: 100%; max-width: 380px;
+      box-shadow: 0 4px 32px rgba(37,99,235,.07);
+    }
+    .circuit-card h3 {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 18px;
+    }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .stat-box {
+      background: var(--bg); border-radius: 10px;
+      padding: 16px; border: 1px solid var(--border);
+    }
+    .stat-box .num {
+      font-family: var(--mono); font-size: 26px; font-weight: 700;
+      color: var(--accent);
+    }
+    .stat-box .label {
+      font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4;
+    }
+    .badge-row { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 7px; }
+    .badge {
+      font-family: var(--mono); font-size: 11px;
+      background: var(--chip-bg); color: var(--chip-text);
+      padding: 4px 10px; border-radius: 20px;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 7vw; }
+    .section-label {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 700; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 40px;
+    }
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ── EXPERIENCE ── */
+    .exp-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 32px;
+      display: grid; grid-template-columns: auto 1fr; gap: 24px;
+      align-items: start;
+      transition: box-shadow .2s;
+    }
+    .exp-card:hover { box-shadow: 0 4px 24px rgba(37,99,235,.09); }
+    .exp-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent); margin-top: 6px;
+      box-shadow: 0 0 0 4px var(--chip-bg);
+    }
+    .exp-company { font-weight: 600; font-size: 17px; color: var(--text); }
+    .exp-role { font-size: 14px; color: var(--accent); font-weight: 500; margin-top: 2px; }
+    .exp-date {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--muted); margin-top: 6px; margin-bottom: 14px;
+    }
+    .exp-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .exp-list li { font-size: 14px; color: var(--muted); padding-left: 18px; position: relative; }
+    .exp-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 12px; }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+    }
+    .proj-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px;
+      transition: all .2s; display: flex; flex-direction: column; gap: 12px;
+    }
+    .proj-card:hover { box-shadow: 0 6px 28px rgba(37,99,235,.1); transform: translateY(-2px); }
+    .proj-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .proj-icon {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .proj-name { font-size: 16px; font-weight: 700; color: var(--text); }
+    .proj-sub { font-size: 12px; color: var(--accent); font-weight: 500; font-family: var(--mono); }
+    .proj-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+    .tag {
+      font-size: 11px; font-family: var(--mono);
+      background: var(--tag-bg); color: var(--tag-text);
+      padding: 3px 9px; border-radius: 20px;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;
+    }
+    .skill-group {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .skill-group h4 {
+      font-family: var(--mono); font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted); margin-bottom: 14px;
+    }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .chip {
+      font-size: 12px; font-family: var(--mono);
+      background: var(--chip-bg); color: var(--chip-text);
+      padding: 5px 11px; border-radius: 20px;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+    .edu-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .edu-card .degree { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .edu-card .school { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .edu-card .score {
+      font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--accent);
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: linear-gradient(135deg, #EEF2FF, #F5F3FF);
+      border-radius: 20px; padding: 60px;
+      text-align: center; margin: 0 7vw 80px;
+      border: 1px solid var(--border);
+    }
+    .contact-section h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+    .contact-section p { color: var(--muted); margin-bottom: 32px; }
+    .contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 12px 22px; border-radius: 10px; text-decoration: none;
+      font-size: 14px; font-weight: 500; color: var(--text);
+      transition: all .2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 24px;
+      font-size: 12px; color: var(--muted);
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(20px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+    .hero-left > * { animation: fadeUp .5s ease both; }
+    .hero-eyebrow  { animation-delay: .05s; }
+    .hero-name     { animation-delay: .12s; }
+    .hero-role     { animation-delay: .18s; }
+    .hero-desc     { animation-delay: .24s; }
+    .hero-cta      { animation-delay: .30s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 60px 6vw 0; text-align: center; }
+      .hero-desc { max-width: 100%; }
+      .hero-cta { justify-content: center; }
+      .hero-right { padding: 40px 6vw 60px; }
+      section { padding: 60px 6vw; }
+      .contact-section { padding: 40px 24px; margin: 0 6vw 60px; }
+      nav { padding: 0 5vw; }
+      .nav-links { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">SK // DV ENGINEER</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">// GATE 2025 Qualified · ECE</p>
+    <h1 class="hero-name">Shashank<br><span>K.</span></h1>
+    <p class="hero-role">Design Verification Engineer</p>
+    <p class="hero-desc">
+      Specialising in SystemVerilog & UVM-based functional verification of SoC and RTL designs.
+      Deep expertise in AMBA protocols (AXI3, APB, CHI) and DDR3/DDR5 memory subsystems.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="mailto:shashankk0724@gmail.com" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="circuit-card">
+      <h3>// Quick Stats</h3>
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="num">9.0</div>
+          <div class="label">CGPA / 10<br>B.E. ECE</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">5+</div>
+          <div class="label">Verified<br>Protocols</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">UVM</div>
+          <div class="label">Testbench<br>Methodology</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">SVA</div>
+          <div class="label">Assertions &amp;<br>Coverage</div>
+        </div>
+      </div>
+      <div class="badge-row">
+        <span class="badge">AXI3</span>
+        <span class="badge">APB</span>
+        <span class="badge">CHI</span>
+        <span class="badge">DDR3</span>
+        <span class="badge">DDR5</span>
+        <span class="badge">QuestaSim</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">// Experience</p>
+  <h2 class="section-title">Where I've Worked</h2>
+
+  <div class="exp-card">
+    <div class="exp-dot"></div>
+    <div>
+      <div class="exp-company">Elobchip Electronics Pvt. Ltd.</div>
+      <div class="exp-role">RTL Design and Verification Intern</div>
+      <div class="exp-date">JAN 2026 – PRESENT · Mysuru, Karnataka</div>
+      <ul class="exp-list">
+        <li>Developed UVM testbenches and verification components — agents, sequences, and scoreboards — for RTL and SoC functional verification.</li>
+        <li>Authored SystemVerilog Assertions (SVA) and functional coverage models, driving coverage closure across multiple design blocks.</li>
+        <li>Performed waveform-based debugging and log analysis to isolate and resolve protocol and corner-case issues.</li>
+        <li>Executed regression suites, triaged failures, and enhanced test reuse to improve overall verification quality.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">// Projects</p>
+  <h2 class="section-title">What I've Built</h2>
+  <div class="projects-grid">
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">🧠</div>
+      </div>
+      <div>
+        <div class="proj-name">DDR5 Memory Controller Verification</div>
+        <div class="proj-sub">DDR5 · Advanced Timing</div>
+      </div>
+      <p class="proj-desc">
+        Extended a verification environment for DDR5 with advanced timing and protocol features. Verified command/address training, bank groups, and high-speed timing constraints. Integrated DDR5 memory model and conducted end-to-end verification with AXI VIP.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">SystemVerilog</span>
+        <span class="tag">UVM</span>
+        <span class="tag">SVA</span>
+        <span class="tag">QuestaSim</span>
+        <span class="tag">AXI VIP</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">💾</div>
+      </div>
+      <div>
+        <div class="proj-name">DDR3 Memory Controller Verification</div>
+        <div class="proj-sub">DDR3 · UVM Environment</div>
+      </div>
+      <p class="proj-desc">
+        Built a complete UVM-based environment (agent, driver, monitor, scoreboard, sequences) for a DDR3 controller. Verified command sequencing, timing parameters (tRCD, tRP, tRAS), and protocol compliance. Integrated Micron DDR3 model with AXI master VIP.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">SystemVerilog</span>
+        <span class="tag">UVM</span>
+        <span class="tag">SVA</span>
+        <span class="tag">Micron Model</span>
+        <span class="tag">AXI</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">⚡</div>
+      </div>
+      <div>
+        <div class="proj-name">AMBA CHI Verification</div>
+        <div class="proj-sub">CHI · Cache Coherency</div>
+      </div>
+      <p class="proj-desc">
+        Modeled CHI transactions across request, response, and snoop channels. Verified coherency mechanisms, ordering guarantees, and data integrity using assertions and functional coverage models for high-performance interconnects.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">SystemVerilog</span>
+        <span class="tag">UVM</span>
+        <span class="tag">CHI</span>
+        <span class="tag">Assertions</span>
+        <span class="tag">Coverage</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">🔗</div>
+      </div>
+      <div>
+        <div class="proj-name">AXI3 Protocol Design &amp; Verification</div>
+        <div class="proj-sub">AXI3 · Burst Transfers</div>
+      </div>
+      <p class="proj-desc">
+        Designed and verified the AXI3 protocol with support for burst transfers, aligned addressing, and multi-channel handshake. Built reusable UVM agents, scoreboards, and assertions for full protocol compliance checking.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">AXI3</span>
+        <span class="tag">UVM Agents</span>
+        <span class="tag">SVA</span>
+        <span class="tag">Scoreboard</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-icon">🔌</div>
+      </div>
+      <div>
+        <div class="proj-name">APB Protocol Design &amp; Verification</div>
+        <div class="proj-sub">APB · Peripheral Communication</div>
+      </div>
+      <p class="proj-desc">
+        Designed and verified the APB protocol covering read/write transactions and the handshake mechanism. Implemented UVM components and protocol checkers for robust peripheral communication verification.
+      </p>
+      <div class="proj-tags">
+        <span class="tag">APB</span>
+        <span class="tag">UVM</span>
+        <span class="tag">Protocol Checker</span>
+        <span class="tag">SVA</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">// Skills</p>
+  <h2 class="section-title">Technical Toolkit</h2>
+  <div class="skills-grid">
+
+    <div class="skill-group">
+      <h4>HDL / Languages</h4>
+      <div class="skill-chips">
+        <span class="chip">SystemVerilog</span>
+        <span class="chip">Verilog</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <h4>Verification</h4>
+      <div class="skill-chips">
+        <span class="chip">UVM</span>
+        <span class="chip">CRV</span>
+        <span class="chip">Functional Coverage</span>
+        <span class="chip">Code Coverage</span>
+        <span class="chip">SVA</span>
+        <span class="chip">Scoreboarding</span>
+        <span class="chip">Waveform Debug</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <h4>Protocols</h4>
+      <div class="skill-chips">
+        <span class="chip">AMBA AXI3</span>
+        <span class="chip">AMBA APB</span>
+        <span class="chip">AMBA CHI</span>
+        <span class="chip">DDR3</span>
+        <span class="chip">DDR5</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <h4>Tools &amp; Concepts</h4>
+      <div class="skill-chips">
+        <span class="chip">QuestaSim</span>
+        <span class="chip">gVim</span>
+        <span class="chip">VS Code</span>
+        <span class="chip">Linux</span>
+        <span class="chip">FSM</span>
+        <span class="chip">Timing Analysis</span>
+        <span class="chip">Cache Coherency</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">// Education</p>
+  <h2 class="section-title">Academic Background</h2>
+  <div class="edu-grid">
+
+    <div class="edu-card">
+      <div class="degree">B.E. – Electronics &amp; Communication Engineering</div>
+      <div class="school">Maharaja Institute of Technology, Mysuru</div>
+      <div class="score">9.0 <span style="font-size:13px;color:var(--muted);font-family:var(--sans);font-weight:400;">CGPA / 10</span></div>
+    </div>
+
+    <div class="edu-card">
+      <div class="degree">Pre-University – PCMB</div>
+      <div class="school">Pramati PU College, Mysuru</div>
+      <div class="score">85<span style="font-size:13px;color:var(--muted);font-family:var(--sans);font-weight:400;">%</span></div>
+    </div>
+
+    <div class="edu-card">
+      <div class="degree">SSLC</div>
+      <div class="school">Christ Public School, Thandavapura, Mysuru</div>
+      <div class="score">80<span style="font-size:13px;color:var(--muted);font-family:var(--sans);font-weight:400;">%</span></div>
+    </div>
+
+    <div class="edu-card" style="border-color: #c7d2fe; background: #EEF2FF;">
+      <div class="degree" style="color:var(--accent);">GATE 2025 Qualified</div>
+      <div class="school">Electronics &amp; Communication Engineering</div>
+      <div class="score" style="font-size:14px;font-family:var(--sans);font-weight:600;color:var(--accent2);">National · 2025</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <p class="section-label" style="text-align:center;margin-bottom:10px;">// Get in Touch</p>
+  <h2>Let's work together.</h2>
+  <p>Open to full-time DV roles, internships, and interesting chip design challenges.</p>
+  <div class="contact-links">
+    <a href="mailto:shashankk0724@gmail.com" class="contact-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      shashankk0724@gmail.com
+    </a>
+    <a href="tel:+917204961790" class="contact-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.63A2 2 0 0 1 3.62 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +91 72049 61790
+    </a>
+    <a href="https://www.linkedin.com/in/shashank-k" target="_blank" class="contact-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/shashankk" target="_blank" class="contact-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+      GitHub
+    </a>
+  </div>
+</div>
+
+<footer>
+  Built with care · Shashank K · Design Verification Engineer · Mysuru, Karnataka
+</footer>
+
+</body>
+</html>
